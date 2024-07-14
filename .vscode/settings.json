@@ -1,9 +1,9 @@
 {
     "editor.codeActionsOnSave": {
-        "source.fixAll": true
+        "source.fixAll": "explicit"
     },
     "[typescript]": {
-        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+        "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "[javascript]": {
         "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
@@ -13,4 +13,10 @@
     },
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
     "eslint.run": "onSave",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[less]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
 }

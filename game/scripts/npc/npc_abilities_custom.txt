@@ -2,4 +2,53 @@
 
 "DOTAAbilities"
 {
+    "special_bonus_unique_none1"
+    {
+        "AbilityType"                   "DOTA_ABILITY_TYPE_ATTRIBUTES"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "BaseClass"                     "special_bonus_base"
+    }
+
+    "special_bonus_unique_none2"
+    {
+        "AbilityType"                   "DOTA_ABILITY_TYPE_ATTRIBUTES"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "BaseClass"                     "special_bonus_base"
+    }
+    "special_bonus_unique_none3"
+    {
+        "AbilityType"                   "DOTA_ABILITY_TYPE_ATTRIBUTES"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "BaseClass"                     "special_bonus_base"
+    }
+    "special_bonus_unique_none4"
+    {
+        "AbilityType"                   "DOTA_ABILITY_TYPE_ATTRIBUTES"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "BaseClass"                     "special_bonus_base"
+    }
+    "special_bonus_unique_none5"
+    {
+        "AbilityType"                   "DOTA_ABILITY_TYPE_ATTRIBUTES"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "BaseClass"                     "special_bonus_base"
+    }
+    "special_bonus_unique_none6"
+    {
+        "AbilityType"                   "DOTA_ABILITY_TYPE_ATTRIBUTES"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "BaseClass"                     "special_bonus_base"
+    }
+    "special_bonus_unique_none7"
+    {
+        "AbilityType"                   "DOTA_ABILITY_TYPE_ATTRIBUTES"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "BaseClass"                     "special_bonus_base"
+    }
+    "special_bonus_unique_none8"
+    {
+        "AbilityType"                   "DOTA_ABILITY_TYPE_ATTRIBUTES"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "BaseClass"                     "special_bonus_base"
+    }
 }

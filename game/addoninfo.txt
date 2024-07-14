@@ -20,7 +20,7 @@
 	ForceDefaultGuide = false
 	MinimalPrecache = false
 	MinPlayers = 1
-	MaxPlayers = 10
+	MaxPlayers = 20
 	map_options = 
 	[
 		{

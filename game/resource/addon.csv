@@ -1,2 +1,26 @@
 ﻿Tokens,English,SChinese
 addon_game_name,YOUR ADDON NAME,你的游戏名
+DOTA_Tooltip_ability_special_bonus_unique_none1,???,？？？
+DOTA_Tooltip_ability_special_bonus_unique_none2,???,？？？
+DOTA_Tooltip_ability_special_bonus_unique_none3,???,？？？
+DOTA_Tooltip_ability_special_bonus_unique_none4,???,？？？
+DOTA_Tooltip_ability_special_bonus_unique_none5,???,？？？
+DOTA_Tooltip_ability_special_bonus_unique_none6,???,？？？
+DOTA_Tooltip_ability_special_bonus_unique_none7,???,？？？
+DOTA_Tooltip_ability_special_bonus_unique_none8,???,？？？
+abi,abilities,技能
+kill,kills,击
+death,deaths,死
+assist,assists,助
+gold,gold,财产总和
+items,items,装备
+bagitems,bagitems,背包
+lh,lasthit,正 / 反
+gpm,GPM,GPM
+xpm,XPM,XPM
+herodmg,hero damage,英雄伤害
+towerkill,towerkills,摧毁防御塔
+takedmg,take damage,承受英雄伤害
+shellfish,shellfish,贝壳
+member,member,会员
+signin,signin,签到

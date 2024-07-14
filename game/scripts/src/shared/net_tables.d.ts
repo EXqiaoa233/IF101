@@ -17,4 +17,29 @@ declare interface CustomNetTableDeclarations {
         key_1: number;
         key_2: string;
     };
+    strategy_abi: {
+        player: {
+            pid: PlayerID
+            sid: string
+            hero: string
+            abihero: {
+                hero: string
+                abi: string[]
+            }[]
+            abi: string[]
+        }[]
+    }
+    telent: {
+        players: {
+            pid: PlayerID
+            lvl: number
+            unlocklvl: number
+            telent: {
+                N: string
+                R: string
+                SR: string
+                SSR: string
+            }[]
+        }[]
+    }
 }

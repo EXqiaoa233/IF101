@@ -1,11 +1,16 @@
-import { Debug } from './Debug';
 import { GameConfig } from './GameConfig';
+import { ProgressController } from './progress';
+import { StrategyController } from './strategy';
+import { TelentController } from './telent';
 import { XNetTable } from './xnet-table';
 
 declare global {
     interface CDOTAGameRules {
         // 声明所有的GameRules模块，这个主要是为了方便其他地方的引用（保证单例模式）
         XNetTable: XNetTable;
+        StrategyCTR: StrategyController
+        ProgressCTR: ProgressController
+        TelentCTR: TelentController
     }
 }
 
@@ -17,9 +22,10 @@ export function ActivateModules() {
     if (GameRules.XNetTable == null) {
         // 初始化所有的GameRules模块
         GameRules.XNetTable = new XNetTable();
+        GameRules.StrategyCTR = new StrategyController();
+        GameRules.ProgressCTR = new ProgressController();
+        GameRules.TelentCTR = new TelentController();
         // 如果某个模块不需要在其他地方使用，那么直接在这里使用即可
         new GameConfig();
-        // 初始化测试模块xD
-        new Debug();
     }
 }

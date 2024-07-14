@@ -99,8 +99,12 @@ module.exports = {
                 // provide type and filename to include in the manifest
                 { import: './end_screen/layout.xml', type: 'EndScreen', filename: 'end_screen.xml' },
 
+                { import: './strategy-time/layout.xml', filename: 'strategy_time.xml' },
+
                 // if filename is not set, it will use the name of the entry
                 { import: './hud/layout.xml', type: 'Hud' },
+
+                
             ],
         }),
         // use ignore plugin to ignore less files changes

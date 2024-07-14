@@ -8,4 +8,23 @@ declare interface CustomGameEventDeclarations {
         foo: number;
         bar: string;
     };
+    selectabi_c2s: {
+        PlayerID: PlayerID
+        abi: string
+    }
+    cabi_c2s: {
+        PlayerID: PlayerID
+        i: number
+        a: number
+    }
+    refreshabi_c2s: {
+        PlayerID: PlayerID
+    }
+    random_telent_c2s: {
+        PlayerID: PlayerID
+        Level: number
+    }
+    click_shop_button: {
+        button: number
+    }
 }

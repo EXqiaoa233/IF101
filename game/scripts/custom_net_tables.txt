@@ -3,6 +3,8 @@
     custom_net_tables = 
     [
         "hero_list",
-        "game_timer"
+        "game_timer",
+        "strategy_abi",
+        "telent",
     ]
 }

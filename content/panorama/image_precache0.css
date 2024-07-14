@@ -1,0 +1,17 @@
+.image-precache {
+	background-image: url("file://{images}/hud/icons/circle.png");
+	background-image: url("file://{images}/hud/icons/close_dark.png");
+	background-image: url("file://{images}/hud/icons/delta.png");
+	background-image: url("file://{images}/hud/icons/ellipse.png");
+	background-image: url("file://{images}/hud/icons/member.png");
+	background-image: url("file://{images}/hud/icons/member_dark.png");
+	background-image: url("file://{images}/hud/icons/shellfish.png");
+	background-image: url("file://{images}/hud/icons/shellfish_dark.png");
+	background-image: url("file://{images}/hud/icons/shellfishplus.png");
+	background-image: url("file://{images}/hud/icons/shop.png");
+	background-image: url("file://{images}/hud/icons/signin.png");
+	background-image: url("file://{images}/hud/icons/signin_dark.png");
+	background-image: url("file://{images}/strategy/bg.png");
+	background-image: url("file://{images}/strategy/pbg.png");
+	background-image: url("file://{images}/strategy/tbg.png");
+}

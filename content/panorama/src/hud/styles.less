@@ -9,7 +9,188 @@
     0% {
         transform: translateX(0);
     }
+
     100% {
         transform: translateX(100%);
     }
+}
+
+.closeImg {
+    width: 25px;
+    height: 25px;
+    background-image: url('file://{images}/hud/icons/close_dark.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.shellfishImg {
+    width: 33.333px;
+    height: 30px;
+    background-image: url('file://{images}/hud/icons/shellfish.png');
+    background-size: 100% 100%;
+}
+
+.shellfishText {
+    color: #FFF;
+    font-family: "Alibaba PuHuiTi 3.0";
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.shellfishPlusImg {
+    width: 20px;
+    height: 20px;
+    background-image: url('file://{images}/hud/icons/shellfishplus.png');
+    background-size: 100% 100%;
+}
+
+.barTextBri {
+    color: #FFF;
+    font-family: "Alibaba PuHuiTi 3.0";
+    font-size: 40px;
+}
+
+.barTextNor {
+    color: #2F2120;
+    font-family: "Alibaba PuHuiTi 3.0";
+    font-size: 40px;
+}
+
+.barBri {
+    border-radius: 100px;
+    background-color: #433736;
+    box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.15);
+}
+
+.barNor {
+    &:hover {
+        border-radius: 100px;
+        background-color: #433736;
+        box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.15);
+        brightness: 2;
+    }
+}
+
+.circle {
+    background-image: url('file://{images}/hud/icons/circle.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.shellfish {
+    background-image: url('file://{images}/hud/icons/shellfish.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.shellfishDark {
+    background-image: url('file://{images}/hud/icons/shellfish_dark.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.member {
+    background-image: url('file://{images}/hud/icons/member.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.memberDark {
+    background-image: url('file://{images}/hud/icons/member_dark.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.signin {
+    background-image: url('file://{images}/hud/icons/signin.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.signinDark {
+    background-image: url('file://{images}/hud/icons/signin_dark.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.telentText {
+    color: #FFF;
+    font-family: KaiTi;
+    font-size: 30px;
+}
+
+.telentRandomImg {
+    background-image: url("s2r://panorama/images/dota_plus/relic_rare_button_psd.vtex");
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+    &:hover {
+        brightness: 2.0;
+    }
+}
+
+.telentRandomText {
+    color: #FFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: "Microsoft YaHei";
+    font-size: 13px;
+    align: center center;
+}
+
+.telentDetermineImg {
+    background-image: url("s2r://panorama/images/backgrounds/background_play_button_2x_png.vtex");
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+    &:hover {
+        brightness: 2.0;
+    }
+}
+
+.telentEllipseImg {
+    background-image: url('file://{images}/hud/icons/ellipse.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.telentEllipseText {
+    color: #FFF;
+    font-family: "Microsoft YaHei";
+    font-size: 13px;
+}
+
+.telentPanelBg1 {
+    background-color: rgba(51, 51, 51, 1);
+    border: 3px solid #FFF;
+
+    .text {
+        color: rgb(255, 255, 255);
+    }
+
+    .delta {
+        background-image: url('file://{images}/hud/icons/delta.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+}
+
+.telentPanelBg2 {
+    background-color: rgba(204, 204, 204, 1);
+
+    .text {
+        color: rgb(82, 82, 82);
+    }
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 1);
+
+        .text {
+            color: rgb(0, 0, 0);
+        }
+    }
+}
+
+.telentPanelText {
+    font-family: "Microsoft YaHei";
+    font-size: 15px;
 }
