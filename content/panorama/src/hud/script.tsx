@@ -3,8 +3,14 @@ import { render, useGameEvent } from 'react-panorama-x';
 
 const DOTAHUD = $.GetContextPanel().GetParent()!.GetParent()!.GetParent()!.GetParent()!;
 
+enum GoodsType {
+    Shellfish = 0,
+    Vip = 1,
+}
+
 interface goods {
-    goodsType: string;
+    name: string;
+    goodsType: GoodsType;
     goodsNumber: number;
     price: number;
     description: string;
@@ -12,26 +18,30 @@ interface goods {
 
 // 测试数据
 const superShellfish: goods = {
-    goodsType: '贝壳',
+    name: '贝壳',
+    goodsType: GoodsType.Shellfish,
     goodsNumber: 6480,
     price: 648,
     description: '超级大堆',
 };
 const goodslist: goods[] = [
     {
-        goodsType: '贝壳',
+        name: '贝壳',
+        goodsType: GoodsType.Shellfish,
         goodsNumber: 60,
         price: 6,
         description: '一小堆',
     },
     {
-        goodsType: '贝壳',
+        name: '贝壳',
+        goodsType: GoodsType.Shellfish,
         goodsNumber: 680,
         price: 68,
         description: '一中堆',
     },
     {
-        goodsType: '贝壳',
+        name: '贝壳',
+        goodsType: GoodsType.Shellfish,
         goodsNumber: 1980,
         price: 198,
         description: '一大堆',
@@ -40,19 +50,22 @@ const goodslist: goods[] = [
 
 const viplist: goods[] = [
     {
-        goodsType: '会员',
+        name: '会员',
+        goodsType: GoodsType.Vip,
         goodsNumber: 1,
         price: 20,
         description: '一个月',
     },
     {
-        goodsType: '会员',
+        name: '会员',
+        goodsType: GoodsType.Vip,
         goodsNumber: 6,
         price: 108,
         description: '六个月',
     },
     {
-        goodsType: '会员',
+        name: '会员',
+        goodsType: GoodsType.Vip,
         goodsNumber: 12,
         price: 198,
         description: '十二个月',
@@ -68,7 +81,7 @@ export const HUD = () => {
         []
     );
 
-    useEffect(() => {}, []);
+    useEffect(() => { }, []);
 
     return (
         <>
@@ -99,10 +112,7 @@ export const Shop = (props: { index: number }) => {
                         boxShadow: ' 0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
                     }}
                 >
-                    {/* 氪金界面 */}
-                    {/* <Buy1 item={superShellfish} />
-                    <Buy2 /> */}
-                    <Vip />
+
 
                     <Panel style={{ marginLeft: '1512.5px', marginTop: '62.5px' }} onactivate={() => ss(0)}>
                         <Panel className="closeImg" />
@@ -167,171 +177,213 @@ export const Shop = (props: { index: number }) => {
                             ))}
                         </Panel>
                     </Panel>
+                    <Panel>
+                        {
+                            [<Goods />, <Vip />].find((v, i) => i + 1 == s)
+                        }
+                    </Panel >
                 </Panel>
             )}
         </>
     );
 };
 
-export const Buy1 = (props: { item: goods }) => {
-    const { item } = props;
+export const Goods = () => {
+    const [gds, sgds] = useState<goods[]>(goodslist)
+    const [spg, sspg] = useState<goods>(superShellfish)
+    return <>
+        <SuperGoods item={spg} style={{
+            marginLeft: '40px',
+            marginTop: '150px'
+        }} />
+        <Panel style={{
+            width: '750px',
+            height: '900px',
+            marginLeft: '800px',
+            marginTop: '150px',
+            flowChildren: 'down'
+        }}>
+            {
+                gds.map(v => <NormalGoods item={v} />)
+            }
+        </Panel>
+    </>
+
+}
+
+export const SuperGoods = (props: { item: goods, style?: Partial<VCSSStyleDeclaration> }) => {
+    const { item, style } = props;
+    let tag,icon,unit
+    if (item.goodsType == GoodsType.Shellfish) {
+        icon = 'coin-icon'
+        tag = '贝壳购买'
+        unit = ''
+    } else if (item.goodsType == GoodsType.Vip) {
+        icon = 'vip-icon'
+        tag = '会员充值'
+        unit = '个月'
+    } else {
+        icon = 'hh,sb'
+        tag = 'hh,sb'
+        unit = ''
+    }
+
     return (
         <>
-            {item.goodsNumber != 0 && (
-                <Panel>
-                    <Panel
-                        className="super-coins"
-                        style={{
-                            width: '700px',
-                            height: '700px',
-                            marginLeft: '40px',
-                            marginTop: '150px',
-                        }}
-                    >
-                        <Panel
-                            className="coin-icon"
+
+            <Panel
+                className="super-coins"
+                style={{
+                    ...{
+                        width: '700px',
+                        height: '700px',
+                    }, ...style
+                }}
+            >
+                <Panel
+                    className={icon}
+                    style={{
+                        marginLeft: '30px',
+                        marginTop: '30px',
+                    }}
+                />
+                <Label
+                    text={`${tag}`}
+                    style={{
+                        color: '#2F2120',
+                        fontSize: '30px',
+                        marginLeft: '83.4px',
+                        marginTop: '30px',
+                    }}
+                />
+                <Panel className="super-coins-content" style={{ width: '640px', height: '568px', marginLeft: '30px', marginTop: '102px' }}>
+                    <Panel className="super-coins-text" style={{ width: '640px', height: '436px' }}>
+                        <Label style={{ align: 'center center' }}></Label>
+                    </Panel>
+                    <Panel className="super-coins-text2" style={{ width: '119px', height: '35px', marginLeft: '30px', marginTop: '456px' }}>
+                        <Label
+                            text="常驻商品"
                             style={{
-                                marginLeft: '30px',
-                                marginTop: '30px',
+                                color: '#2F2120',
+                                fontSize: '25px',
+                                marginLeft: '10px',
+                                marginTop: '5px',
                             }}
                         />
+                    </Panel>
+                    <Label
+                        text={`${item.name} × ${item.goodsNumber}${unit}`}
+                        style={{ color: '#fff', fontSize: '23px', marginLeft: '30px', marginTop: '511px' }}
+                    />
+                    <Panel
+                        className="super-coins-buyButton"
+                        style={{ width: '297px', height: '62px', marginLeft: '313px', marginTop: '466px' }}
+                    >
                         <Label
-                            text={`${item.goodsType}购买`}
+                            text="购买"
                             style={{
                                 color: '#2F2120',
                                 fontSize: '30px',
-                                marginLeft: '83.4px',
-                                marginTop: '30px',
+                                marginLeft: '30px',
+                                marginTop: '10px',
                             }}
                         />
-                        <Panel className="super-coins-content" style={{ width: '640px', height: '568px', marginLeft: '30px', marginTop: '102px' }}>
-                            <Panel className="super-coins-text" style={{ width: '640px', height: '436px' }}>
-                                <Label style={{ align: 'center center' }}></Label>
-                            </Panel>
-                            <Panel className="super-coins-text2" style={{ width: '119px', height: '35px', marginLeft: '30px', marginTop: '456px' }}>
-                                <Label
-                                    text="常驻商品"
-                                    style={{
-                                        color: '#2F2120',
-                                        fontSize: '25px',
-                                        marginLeft: '10px',
-                                        marginTop: '5px',
-                                    }}
-                                />
-                            </Panel>
-                            <Label
-                                text={`${item.goodsType} × ${item.goodsNumber}`}
-                                style={{ color: '#fff', fontSize: '23px', marginLeft: '30px', marginTop: '511px' }}
-                            />
-                            <Panel
-                                className="super-coins-buyButton"
-                                style={{ width: '297px', height: '62px', marginLeft: '313px', marginTop: '466px' }}
-                            >
-                                <Label
-                                    text="购买"
-                                    style={{
-                                        color: '#2F2120',
-                                        fontSize: '30px',
-                                        marginLeft: '30px',
-                                        marginTop: '10px',
-                                    }}
-                                />
-                                <Label
-                                    text={`¥${item.price}`}
-                                    style={{
-                                        color: '#2F2120',
-                                        fontSize: '30px',
-                                        marginLeft: '190px',
-                                        marginTop: '10px',
-                                    }}
-                                />
-                            </Panel>
-                        </Panel>
+                        <Label
+                            text={`¥${item.price}`}
+                            style={{
+                                color: '#2F2120',
+                                fontSize: '30px',
+                                marginLeft: '190px',
+                                marginTop: '10px',
+                            }}
+                        />
                     </Panel>
                 </Panel>
-            )}
+            </Panel>
         </>
     );
 };
 
-export const Buy2 = () => {
-    const [gd, sgd] = useState<goods[]>(goodslist);
+export const NormalGoods = (props: { item: goods, style?: Partial<VCSSStyleDeclaration> }) => {
+    const { item, style } = props
+    let tag,icon,unit
+    if (item.goodsType == GoodsType.Shellfish) {
+        icon = 'coin-icon'
+        tag = '贝壳购买'
+        unit = ''
+    } else if (item.goodsType == GoodsType.Vip) {
+        icon = 'vip-icon'
+        tag = '会员充值'
+        unit = '个月'
+    } else {
+        icon = 'hh,sb'
+        tag = 'hh,sb'
+        unit = ''
+    }
     return (
         <>
-            <Panel
-                style={{
-                    width: '750px',
-                    height: '900px',
-                    marginLeft: '800px',
-                    marginTop: '150px',
-                }}
-            >
-                <Panel style={{ flowChildren: 'down' }}>
-                    {gd.map((v, i) => (
-                        <Panel className="other-coins">
-                            <Panel
-                                className="coin-icon"
-                                style={{
-                                    marginLeft: '30px',
-                                    marginTop: '30px',
-                                }}
-                            />
-                            <Label
-                                text={`${v.goodsType}购买`}
-                                style={{
-                                    color: '#2F2120',
-                                    fontSize: '30px',
-                                    marginLeft: '83.4px',
-                                    marginTop: '30px',
-                                }}
-                            />
-                            <Panel className="other-coin-content">
-                                <Panel className="other-coin-text">
-                                    <Label style={{ align: 'center center' }}></Label>
-                                </Panel>
-                                <Panel
-                                    className="super-coins-text2"
-                                    style={{ width: '119px', height: '35px', marginLeft: '327px', marginTop: '30px' }}
-                                >
-                                    <Label
-                                        text="常驻商品"
-                                        style={{
-                                            color: '#2F2120',
-                                            fontSize: '25px',
-                                            marginLeft: '10px',
-                                            marginTop: '5px',
-                                        }}
-                                    />
-                                </Panel>
-                                <Label
-                                    text={`${v.goodsType} × ${v.goodsNumber}`}
-                                    style={{ color: '#fff', fontSize: '23px', marginLeft: '327px', marginTop: '85px' }}
-                                />
-                                <Panel className="other-coins-buybutton">
-                                    <Label
-                                        text="购买"
-                                        style={{
-                                            color: '#2F2120',
-                                            fontSize: '22px',
-                                            marginLeft: '10px',
-                                            marginTop: '6.5px',
-                                        }}
-                                    />
-                                    <Label
-                                        text={`¥ ${v.price}`}
-                                        style={{
-                                            color: '#2F2120',
-                                            fontSize: '22px',
-                                            marginLeft: '85px',
-                                            marginTop: '6px',
-                                        }}
-                                    />
-                                </Panel>
-                            </Panel>
-                        </Panel>
-                    ))}
+            <Panel className="other-coins">
+                <Panel
+                    className={icon}
+                    style={{
+                        marginLeft: '30px',
+                        marginTop: '30px',
+                    }}
+                />
+                <Label
+                    text={`${tag}`}
+                    style={{
+                        color: '#2F2120',
+                        fontSize: '30px',
+                        marginLeft: '83.4px',
+                        marginTop: '30px',
+                    }}
+                />
+                <Panel className="other-coin-content">
+                    <Panel className="other-coin-text">
+                        <Label style={{ align: 'center center' }}></Label>
+                    </Panel>
+                    <Panel
+                        className="super-coins-text2"
+                        style={{ width: '119px', height: '35px', marginLeft: '327px', marginTop: '30px' }}
+                    >
+                        <Label
+                            text="常驻商品"
+                            style={{
+                                color: '#2F2120',
+                                fontSize: '25px',
+                                marginLeft: '10px',
+                                marginTop: '5px',
+                            }}
+                        />
+                    </Panel>
+                    <Label
+                        text={`${item.name} × ${item.goodsNumber}${unit}`}
+                        style={{ color: '#fff', fontSize: '23px', marginLeft: '327px', marginTop: '85px' }}
+                    />
+                    <Panel className="other-coins-buybutton">
+                        <Label
+                            text="购买"
+                            style={{
+                                color: '#2F2120',
+                                fontSize: '22px',
+                                marginLeft: '10px',
+                                marginTop: '6.5px',
+                            }}
+                        />
+                        <Label
+                            text={`¥ ${item.price}`}
+                            style={{
+                                color: '#2F2120',
+                                fontSize: '22px',
+                                marginLeft: '85px',
+                                marginTop: '6px',
+                            }}
+                        />
+                    </Panel>
                 </Panel>
             </Panel>
+            {/* </Panel> */}
         </>
     );
 };
@@ -353,63 +405,7 @@ export const Vip = () => {
             >
                 <Panel style={{ flowChildren: 'down' }}>
                     {member.map((v, i) => (
-                        <Panel className="other-coins">
-                            <Panel className="vip-icon-background" style={{ marginLeft: '30px', marginTop: '30px' }}>
-                                <Panel className="vip-icon" style={{ marginLeft: '8px', marginTop: '8px' }} />
-                            </Panel>
-                            <Label
-                                text={`${v.goodsType}充值`}
-                                style={{
-                                    color: '#2F2120',
-                                    fontSize: '30px',
-                                    marginLeft: '83.4px',
-                                    marginTop: '30px',
-                                }}
-                            />
-                            <Panel className="other-coin-content">
-                                <Panel className="other-coin-text">
-                                    <Label style={{ align: 'center center' }}></Label>
-                                </Panel>
-                                <Panel
-                                    className="super-coins-text2"
-                                    style={{ width: '119px', height: '35px', marginLeft: '327px', marginTop: '30px' }}
-                                >
-                                    <Label
-                                        text="常驻商品"
-                                        style={{
-                                            color: '#2F2120',
-                                            fontSize: '25px',
-                                            marginLeft: '10px',
-                                            marginTop: '5px',
-                                        }}
-                                    />
-                                </Panel>
-                                <Label
-                                    text={`${v.goodsType} × ${v.goodsNumber}个月`}
-                                    style={{ color: '#fff', fontSize: '23px', marginLeft: '327px', marginTop: '85px' }}
-                                />
-                                <Panel className="other-coins-buybutton">
-                                    <Label
-                                        text="购买"
-                                        style={{
-                                            color: '#2F2120',
-                                            fontSize: '22px',
-                                            marginLeft: '10px',
-                                            marginTop: '6.5px',
-                                        }}
-                                    />
-                                    <Label
-                                        text={`¥ ${v.price}`}
-                                        style={{
-                                            color: '#2F2120',
-                                            fontSize: '22px',
-                                            marginLeft: '85px',
-                                            marginTop: '6px',
-                                        }}
-                                    />
-                                </Panel>
-                            </Panel>
-                        </Panel>
+                        <NormalGoods item={v} />
                     ))}
                 </Panel>
             </Panel>

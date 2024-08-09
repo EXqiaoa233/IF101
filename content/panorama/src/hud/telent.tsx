@@ -187,4 +187,4 @@ export const Telent = () => {
     );
 };
 
-render(<Telent />, $.GetContextPanel());
+// render(<Telent />, $.GetContextPanel());
