@@ -81,7 +81,7 @@ export const HUD = () => {
         []
     );
 
-    useEffect(() => {}, []);
+    useEffect(() => { }, []);
 
     return (
         <>
@@ -147,20 +147,14 @@ export const Shop = (props: { index: number }) => {
                                 boxShadow: '0px 0px 6px 6px rgba(0, 0, 0, 0.15)',
                             }}
                         />
-                        <Panel style={{ flowChildren: 'right' }}>
+                        <Panel style={{}}>
                             {['shellfish', 'member', 'signin', 'activity'].map((v, i) => (
                                 <Panel
-                                    style={{ width: '250px', marginLeft: '100px', height: '70px' }}
-                                    className={s == i + 1 ? 'barBri' : ''}
+                                    style={{ ...{ flowChildren: 'right', marginLeft: `${50 + i * 250}px`, height: '70px', transitionProperty: 'width', transitionDuration: '0.2s' }, ...s == i + 1 ? { borderRadius: '100px', backgroundColor: '#433736', boxShadow: '0px 0px 6px 6px rgba(0, 0, 0, 0.15)', width: '230px' } : { width: '180px' } }}
                                     onactivate={() => {
                                         ss(i + 1);
                                     }}
                                 >
-                                    <Label
-                                        text={$.Localize(`#${v}`)}
-                                        style={{ align: 'center center' }}
-                                        className={s == i + 1 ? 'barTextBri' : 'barTextNor'}
-                                    />
                                     {s == i + 1 ? (
                                         <Panel
                                             className="circle"
@@ -174,6 +168,11 @@ export const Shop = (props: { index: number }) => {
                                             style={{ height: '40px', width: '40px', color: 'white', verticalAlign: 'center', marginLeft: '40px' }}
                                         />
                                     )}
+                                    <Label
+                                        text={$.Localize(`#${v}`)}
+                                        style={{ marginLeft: s == i + 1 ? '30px' : '10px', verticalAlign: 'center'}}
+                                        className={s == i + 1 ? 'barTextBri' : 'barTextNor'}
+                                    />
                                 </Panel>
                             ))}
                         </Panel>
@@ -242,6 +241,7 @@ export const SuperGoods = (props: { item: goods; style?: Partial<VCSSStyleDeclar
                     },
                     ...style,
                 }}
+                hittest={false}
             >
                 <Panel
                     className={icon}
@@ -322,7 +322,7 @@ export const NormalGoods = (props: { item: goods; style?: Partial<VCSSStyleDecla
     }
     return (
         <>
-            <Panel className="other-coins">
+            <Panel className="other-coins" hittest={false}>
                 <Panel
                     className={icon}
                     style={{
@@ -389,7 +389,7 @@ export const Vip = () => {
     const [member, smember] = useState<goods[]>(viplist);
     return (
         <>
-            <Panel className="vip-description">
+            <Panel className="vip-description" hittest={false}>
                 <Panel className="vip-description-background" style={{ zIndex: -1 }} />
             </Panel>
             <Panel
