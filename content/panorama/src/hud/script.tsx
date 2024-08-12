@@ -81,7 +81,7 @@ export const HUD = () => {
         []
     );
 
-    useEffect(() => { }, []);
+    useEffect(() => {}, []);
 
     return (
         <>
@@ -98,6 +98,9 @@ export const Buttons = () => {
 
 export const Shop = (props: { index: number }) => {
     const [s, ss] = useState(props.index);
+    //签到状态
+    const [isc, sisc] = useState(0); //是否签到
+    const [cday, scday] = useState(1); //第几天签到
     return (
         <>
             {s != 0 && (
@@ -112,8 +115,6 @@ export const Shop = (props: { index: number }) => {
                         boxShadow: ' 0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
                     }}
                 >
-
-
                     <Panel style={{ marginLeft: '1512.5px', marginTop: '62.5px' }} onactivate={() => ss(0)}>
                         <Panel className="closeImg" />
                     </Panel>
@@ -147,7 +148,7 @@ export const Shop = (props: { index: number }) => {
                             }}
                         />
                         <Panel style={{ flowChildren: 'right' }}>
-                            {['shellfish', 'member', 'signin'].map((v, i) => (
+                            {['shellfish', 'member', 'signin', 'activity'].map((v, i) => (
                                 <Panel
                                     style={{ width: '250px', marginLeft: '100px', height: '70px' }}
                                     className={s == i + 1 ? 'barBri' : ''}
@@ -177,11 +178,7 @@ export const Shop = (props: { index: number }) => {
                             ))}
                         </Panel>
                     </Panel>
-                    <Panel>
-                        {
-                            [<Goods />, <Vip />].find((v, i) => i + 1 == s)
-                        }
-                    </Panel >
+                    <Panel>{[<Goods />, <Vip />, <Checkin checkinDay={cday} ischecked={isc} />].find((v, i) => i + 1 == s)}</Panel>
                 </Panel>
             )}
         </>
@@ -189,55 +186,61 @@ export const Shop = (props: { index: number }) => {
 };
 
 export const Goods = () => {
-    const [gds, sgds] = useState<goods[]>(goodslist)
-    const [spg, sspg] = useState<goods>(superShellfish)
-    return <>
-        <SuperGoods item={spg} style={{
-            marginLeft: '40px',
-            marginTop: '150px'
-        }} />
-        <Panel style={{
-            width: '750px',
-            height: '900px',
-            marginLeft: '800px',
-            marginTop: '150px',
-            flowChildren: 'down'
-        }}>
-            {
-                gds.map(v => <NormalGoods item={v} />)
-            }
-        </Panel>
-    </>
+    const [gds, sgds] = useState<goods[]>(goodslist);
+    const [spg, sspg] = useState<goods>(superShellfish);
+    return (
+        <>
+            <SuperGoods
+                item={spg}
+                style={{
+                    marginLeft: '40px',
+                    marginTop: '150px',
+                }}
+            />
+            <Panel
+                style={{
+                    width: '750px',
+                    height: '900px',
+                    marginLeft: '800px',
+                    marginTop: '150px',
+                    flowChildren: 'down',
+                }}
+            >
+                {gds.map(v => (
+                    <NormalGoods item={v} />
+                ))}
+            </Panel>
+        </>
+    );
+};
 
-}
-
-export const SuperGoods = (props: { item: goods, style?: Partial<VCSSStyleDeclaration> }) => {
+export const SuperGoods = (props: { item: goods; style?: Partial<VCSSStyleDeclaration> }) => {
     const { item, style } = props;
-    let tag,icon,unit
+    let tag, icon, unit;
     if (item.goodsType == GoodsType.Shellfish) {
-        icon = 'coin-icon'
-        tag = '贝壳购买'
-        unit = ''
+        icon = 'coin-icon';
+        tag = '贝壳购买';
+        unit = '';
     } else if (item.goodsType == GoodsType.Vip) {
-        icon = 'vip-icon'
-        tag = '会员充值'
-        unit = '个月'
+        icon = 'vip-icon';
+        tag = '会员充值';
+        unit = '个月';
     } else {
-        icon = 'hh,sb'
-        tag = 'hh,sb'
-        unit = ''
+        icon = 'hh,sb';
+        tag = 'hh,sb';
+        unit = '';
     }
 
     return (
         <>
-
             <Panel
                 className="super-coins"
                 style={{
                     ...{
                         width: '700px',
                         height: '700px',
-                    }, ...style
+                    },
+                    ...style,
                 }}
             >
                 <Panel
@@ -275,10 +278,7 @@ export const SuperGoods = (props: { item: goods, style?: Partial<VCSSStyleDeclar
                         text={`${item.name} × ${item.goodsNumber}${unit}`}
                         style={{ color: '#fff', fontSize: '23px', marginLeft: '30px', marginTop: '511px' }}
                     />
-                    <Panel
-                        className="super-coins-buyButton"
-                        style={{ width: '297px', height: '62px', marginLeft: '313px', marginTop: '466px' }}
-                    >
+                    <Button className="super-coins-buyButton" style={{ width: '297px', height: '62px', marginLeft: '313px', marginTop: '466px' }}>
                         <Label
                             text="购买"
                             style={{
@@ -297,28 +297,28 @@ export const SuperGoods = (props: { item: goods, style?: Partial<VCSSStyleDeclar
                                 marginTop: '10px',
                             }}
                         />
-                    </Panel>
+                    </Button>
                 </Panel>
             </Panel>
         </>
     );
 };
 
-export const NormalGoods = (props: { item: goods, style?: Partial<VCSSStyleDeclaration> }) => {
-    const { item, style } = props
-    let tag,icon,unit
+export const NormalGoods = (props: { item: goods; style?: Partial<VCSSStyleDeclaration> }) => {
+    const { item, style } = props;
+    let tag, icon, unit;
     if (item.goodsType == GoodsType.Shellfish) {
-        icon = 'coin-icon'
-        tag = '贝壳购买'
-        unit = ''
+        icon = 'coin-icon';
+        tag = '贝壳购买';
+        unit = '';
     } else if (item.goodsType == GoodsType.Vip) {
-        icon = 'vip-icon'
-        tag = '会员充值'
-        unit = '个月'
+        icon = 'vip-icon';
+        tag = '会员充值';
+        unit = '个月';
     } else {
-        icon = 'hh,sb'
-        tag = 'hh,sb'
-        unit = ''
+        icon = 'hh,sb';
+        tag = 'hh,sb';
+        unit = '';
     }
     return (
         <>
@@ -343,10 +343,7 @@ export const NormalGoods = (props: { item: goods, style?: Partial<VCSSStyleDecla
                     <Panel className="other-coin-text">
                         <Label style={{ align: 'center center' }}></Label>
                     </Panel>
-                    <Panel
-                        className="super-coins-text2"
-                        style={{ width: '119px', height: '35px', marginLeft: '327px', marginTop: '30px' }}
-                    >
+                    <Panel className="super-coins-text2" style={{ width: '119px', height: '35px', marginLeft: '327px', marginTop: '30px' }}>
                         <Label
                             text="常驻商品"
                             style={{
@@ -361,26 +358,26 @@ export const NormalGoods = (props: { item: goods, style?: Partial<VCSSStyleDecla
                         text={`${item.name} × ${item.goodsNumber}${unit}`}
                         style={{ color: '#fff', fontSize: '23px', marginLeft: '327px', marginTop: '85px' }}
                     />
-                    <Panel className="other-coins-buybutton">
+                    <Button className="other-coins-buybutton">
                         <Label
                             text="购买"
                             style={{
-                                color: '#2F2120',
                                 fontSize: '22px',
                                 marginLeft: '10px',
                                 marginTop: '6.5px',
                             }}
+                            className="text"
                         />
                         <Label
                             text={`¥ ${item.price}`}
                             style={{
-                                color: '#2F2120',
                                 fontSize: '22px',
                                 marginLeft: '85px',
                                 marginTop: '6px',
                             }}
+                            className="text"
                         />
-                    </Panel>
+                    </Button>
                 </Panel>
             </Panel>
             {/* </Panel> */}
@@ -408,6 +405,19 @@ export const Vip = () => {
                         <NormalGoods item={v} />
                     ))}
                 </Panel>
+            </Panel>
+        </>
+    );
+};
+
+export const Checkin = (props: { checkinDay: number; ischecked: number }) => {
+    return (
+        <>
+            <Panel>
+                <Image className="checkinImg" src={`file://{images}/hud/signinImg/signin_${props.checkinDay}_${props.ischecked}.png`} />
+            </Panel>
+            <Panel className="checkin-description">
+                <Panel className="checkin-description-content"></Panel>
             </Panel>
         </>
     );

@@ -225,7 +225,7 @@
 
 .super-coins-content {
     border-radius: 50px;
-    border:  3px #2F2120;
+    border: 3px #2F2120;
     background-color: #2F2120;
 }
 
@@ -244,7 +244,14 @@
 .super-coins-buyButton {
     border-radius: 100px;
     border: 3px solid #80745C;
-    background-color: #FFF;
+    background-color: #fff;
+    &:hover {
+        background-color: gradient(linear, 100% 100%, 0% 0%, from(#FFFFFF), to(#80745C));
+    }
+
+    &:active {
+        background-color: gradient(linear, 100% 100%, 0% 0%, from(#80745C), to(#FFFFFF));
+    }
 }
 
 .other-coins {
@@ -283,12 +290,24 @@
     border: 3px solid #80745C;
     // background-color: linear-gradient(0deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.10) 100%), #FFF;
     background-color: #FFF;
+
+    .text {
+        color: #2F2120;
+    }
+
+    &:hover {
+        background-color: gradient(linear, 100% 100%, 0% 0%, from(#FFFFFF), to(#80745C));
+    }
+
+    &:active {
+        background-color: gradient(linear, 100% 100%, 0% 0%, from(#80745C), to(#FFFFFF));
+    }
 }
 
 .vip-description {
     width: 700px;
     height: 700px;
-    margin-left: 50px;
+    margin-left: 40px;
     margin-top: 150px;
     border-radius: 50px;
     border: 3px solid #2F2120;
@@ -318,4 +337,34 @@
     height: 28px;
     background-image: url('file://{images}/hud/icons/member.png');
     background-size: 100% 100%;
+}
+
+.checkinImg {
+    width: 950px;
+    height: 760px;
+    margin-left: 50px;
+    margin-top: 150px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.checkin-description {
+    width: 500px;
+    height: 700px;
+    margin-left: 1050px;
+    margin-top: 150px;
+    border-radius: 50px;
+    border: 3px solid #2F2120;
+    background-color: #80745C;
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.25);
+}
+
+.checkin-description-content {
+    width: 440px;
+    height: 640px;
+    margin-left: 30px;
+    margin-top: 30px;
+    border-radius: 50px;
+    border: 10px solid #FFF;
+    background-color: #000;
 }
