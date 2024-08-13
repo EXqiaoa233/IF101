@@ -81,7 +81,7 @@ export const HUD = () => {
         []
     );
 
-    useEffect(() => { }, []);
+    useEffect(() => {}, []);
 
     return (
         <>
@@ -150,7 +150,23 @@ export const Shop = (props: { index: number }) => {
                         <Panel style={{}}>
                             {['shellfish', 'member', 'signin', 'activity'].map((v, i) => (
                                 <Panel
-                                    style={{ ...{ flowChildren: 'right', marginLeft: `${50 + i * 250}px`, height: '70px', transitionProperty: 'width', transitionDuration: '0.2s' }, ...s == i + 1 ? { borderRadius: '100px', backgroundColor: '#433736', boxShadow: '0px 0px 6px 6px rgba(0, 0, 0, 0.15)', width: '230px' } : { width: '180px' } }}
+                                    style={{
+                                        ...{
+                                            flowChildren: 'right',
+                                            marginLeft: `${50 + i * 250}px`,
+                                            height: '70px',
+                                            transitionProperty: 'width',
+                                            transitionDuration: '0.2s',
+                                        },
+                                        ...(s == i + 1
+                                            ? {
+                                                  borderRadius: '100px',
+                                                  backgroundColor: '#433736',
+                                                  boxShadow: '0px 0px 6px 6px rgba(0, 0, 0, 0.15)',
+                                                  width: '230px',
+                                              }
+                                            : { width: '180px' }),
+                                    }}
                                     onactivate={() => {
                                         ss(i + 1);
                                     }}
@@ -170,14 +186,16 @@ export const Shop = (props: { index: number }) => {
                                     )}
                                     <Label
                                         text={$.Localize(`#${v}`)}
-                                        style={{ marginLeft: s == i + 1 ? '30px' : '10px', verticalAlign: 'center'}}
+                                        style={{ marginLeft: s == i + 1 ? '30px' : '10px', verticalAlign: 'center' }}
                                         className={s == i + 1 ? 'barTextBri' : 'barTextNor'}
                                     />
                                 </Panel>
                             ))}
                         </Panel>
                     </Panel>
-                    <Panel>{[<Goods />, <Vip />, <Checkin checkinDay={cday} ischecked={isc} />].find((v, i) => i + 1 == s)}</Panel>
+                    <Panel>
+                        {[<Goods />, <Vip />, <Checkin checkinDay={cday} ischecked={isc} />, <Activity index={1} />].find((v, i) => i + 1 == s)}
+                    </Panel>
                 </Panel>
             )}
         </>
@@ -419,6 +437,91 @@ export const Checkin = (props: { checkinDay: number; ischecked: number }) => {
             <Panel className="checkin-description">
                 <Panel className="checkin-description-content"></Panel>
             </Panel>
+        </>
+    );
+};
+
+export const Activity = (props: { index: number }) => {
+    const [selectedPage, sselectedPage] = useState(props.index);
+    return (
+        <>
+            <Panel className="activity-nav-background">
+                <Label text="活动列表" style={{ marginLeft: '100px', marginTop: '20px', fontSize: '25px', color: '#2F2120' }} />
+                <Panel className="activity-nav">
+                    <Panel className="activity-nav-list" style={{ flowChildren: 'down' }}>
+                        {['呼朋引伴', '活动2', '活动3'].map((v, i) => (
+                            <Panel
+                                onactivate={() => {
+                                    sselectedPage(i + 1);
+                                }}
+                            >
+                                <Panel className={selectedPage == i + 1 ? 'activityItem-active' : 'activityItem-normal'}>
+                                    <Label text={v} className={'text'} />
+                                    <Panel className="line" />
+                                </Panel>
+                            </Panel>
+                        ))}
+                    </Panel>
+                </Panel>
+            </Panel>
+            <Panel>
+                {[<InvitedActivity inviteduserNum={9999} awareShellfish={99990} userId="9999999999" />].find((v, i) => i + 1 == selectedPage)}
+            </Panel>
+        </>
+    );
+};
+
+export const InvitedActivity = (props: { inviteduserNum: number; awareShellfish: number; userId: string }) => {
+    return (
+        <>
+            <Panel className="inviteduser-number">
+                <Label
+                    text={`${props.inviteduserNum}`}
+                    style={{
+                        color: '#fff',
+                        fontSize: '100px',
+                        fontFamily: 'Alibaba PuHuiTi 3.0',
+                        marginLeft: '158px',
+                        marginTop: '38px',
+                    }}
+                />
+                <Label
+                    text="已邀请用户数"
+                    style={{
+                        color: '#fff',
+                        fontSize: '25px',
+                        fontFamily: 'Alibaba PuHuiTi 3.0',
+                        marginLeft: '202px',
+                        marginTop: '178px',
+                    }}
+                />
+            </Panel>
+            <Panel className="awareShellfish-number">
+                <Label
+                    text={`${props.awareShellfish}`}
+                    style={{
+                        color: '#fff',
+                        fontSize: '100px',
+                        fontFamily: 'Alibaba PuHuiTi 3.0',
+                        marginLeft: '158px',
+                        marginTop: '38px',
+                    }}
+                />
+                <Label
+                    text="已获得贝壳"
+                    style={{
+                        color: '#fff',
+                        fontSize: '25px',
+                        fontFamily: 'Alibaba PuHuiTi 3.0',
+                        marginLeft: '213px',
+                        marginTop: '178px',
+                    }}
+                />
+            </Panel>
+            <Panel className="userId" style={{ marginLeft: '400px', marginTop: '430px' }}>
+                <Label text="您的用户ID" style={{ color: '#fff', fontSize: '25px', marginLeft: '60px', marginTop: '8px' }} />
+            </Panel>
+            <Panel className="userId" style={{ marginLeft: '400px', marginTop: '500px' }}></Panel>
         </>
     );
 };
